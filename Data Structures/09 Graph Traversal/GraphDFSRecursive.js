@@ -52,6 +52,49 @@ class Graph {
         dfsHelper(startNode)
         return result
     }
+
+    depthFirstIterative(startNode) {
+        let stack = []
+        let result = []
+        let visited = {}
+        let currVertex
+
+        stack.push(startNode)
+        visited[startNode] = true
+
+        while (stack.length) {
+            currVertex = stack.pop()
+            result.push(currVertex)
+            this.adjacencyList[currVertex].forEach(next => {
+                if (!visited[next]) {
+                    visited[next] = true
+                    stack.push(next)
+                }
+            })
+        }
+        return result
+    }
+
+    breadthFirst(startNode) {
+        let queue = [startNode]
+        let visited = {}
+        let result = []
+        let currVertex
+
+        visited[startNode] = true
+        while (queue.length) {
+            currVertex = queue.shift()
+            result.push(currVertex)
+            this.adjacencyList[currVertex].forEach(next => {
+                if (!visited[next]) {
+                    visited[next] = true
+                    queue.push(next)
+                }
+            })
+        }
+
+        return result
+    }
 }
 
 graph = new Graph()
@@ -73,6 +116,8 @@ graph.addEdge("E", "F")
 console.log(graph)
 
 console.log(graph.depthFirstRecursive("A"))
+console.log(graph.depthFirstIterative("A"))
+console.log(graph.breadthFirst("A"))
 
 
 //          A

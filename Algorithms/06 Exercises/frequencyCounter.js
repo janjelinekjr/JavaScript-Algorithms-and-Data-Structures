@@ -68,3 +68,35 @@ function findAllDuplicates(arr) {
 // console.log(findAllDuplicates([4, 3, 2, 7, 8, 2, 3, 1]))
 // console.log(findAllDuplicates([4, 3, 2, 1, 0]))
 // console.log(findAllDuplicates([4, 3, 2, 1, 0, 1, 2, 3]))
+
+function findPair(arr, difNum) {
+    if (arr.length === 0) return false
+
+    // O(n2)
+    // for(let i = 0; i < arr.length; i++) {
+    //     for( let j = i + 1; j < arr.length; j++) {
+    //         if((arr[i] - arr[j]) === difNum) return true
+    //     }
+    // }
+
+    // o(n)
+    if (arr.length === 0) return false;
+
+    const seen = new Set();
+
+    for (let i = 0; i < arr.length; i++) {
+        const target1 = arr[i] - difNum;
+        const target2 = arr[i] + difNum;
+
+        if (seen.has(target1) || seen.has(target2)) {
+            return true;
+        }
+        seen.add(arr[i]);
+    }
+
+    return false
+}
+
+// console.log(findPair([6, 1, 4, 10, 2, 4], 2))
+// console.log(findPair([8, 6, 2, 4, 1, 0, 2, 5, 13], 1))
+// console.log(findPair([6, 1, 4, 10, 2, 4], 22))
